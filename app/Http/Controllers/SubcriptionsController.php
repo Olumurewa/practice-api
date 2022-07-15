@@ -25,11 +25,18 @@ class SubcriptionsController extends Controller
     public function create(Request $request)
     {
         $subscriptions = new Subcriptions;
-        $input = $request-> all();
-        $validator = validator::make($input, [
-            'website_id'=>'required',
-            'post_content'=>'required'     
-        ]);
+        // $validator = validator::make($input, [
+        //     'website_id'=>'required',
+        //     'post_content'=>'required'     
+        // ]);
+        $subscriptions->website_id = $request->website_id;
+        $subscriptions->subscriber_id = $request->subscriber_id;
+
+        $subscriptions->save();
+
+        return response()->json([
+            'message'=>'Subscription Saved.'
+        ],201);
     }
 
     /**
